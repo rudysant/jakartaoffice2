@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class NlacatstatConfig(AppConfig):
+class CatstatConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'nlacatstat'
+    name = 'catstat'

@@ -1,0 +1,18 @@
+<table border="1">
+
+    <tr>
+        <td>No</td>
+        <td align="center">Title</td>
+        <td align="center">Published in</td>
+    </tr>
+    
+    {% for x in detail_pubyear %}
+    
+    <tr>
+        
+        <td>{{ forloop.counter }}</td>  
+        <td>{{ x.title }}</td>
+        <td>{{ x.publish_year }}</td>
+    </tr>
+    {% endfor %}
+    </table>

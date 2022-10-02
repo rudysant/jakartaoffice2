@@ -1,0 +1,18 @@
+<table border="1">
+
+    <tr>
+        <td>No</td>
+        <td align="center">Title</td>
+        <td align="center">Language</td>
+    </tr>
+    
+    {% for x in detail_language %}
+    
+    <tr>
+        
+        <td>{{ forloop.counter }}</td>  
+        <td>{{ x.title }}</td>
+        <td>{{ x.language }}</td>
+    </tr>
+    {% endfor %}
+    </table>

@@ -1,0 +1,19 @@
+
+<table border="1">
+
+    <tr>
+        <td>No</td>
+        <td align="center">Title</td>
+        <td align="center">Authorship type</td>
+    </tr>
+    
+    {% for x in detail_aut %}
+    
+    <tr>
+        
+        <td>{{ forloop.counter }}</td>  
+        <td>{{ x.title }}</td>
+        <td>{{ x.authorship_type }}</td>
+    </tr>
+    {% endfor %}
+    </table>

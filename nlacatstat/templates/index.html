@@ -1,0 +1,258 @@
+<h3>Realtime Cataloguing Statistics</h3>
+
+{% load percent_aut %}
+
+<h3>General Statistics</h3>
+Total of cataloguing : <b> {{ bookcount }} </b>
+<br>
+<br>Current consignment number is : <b>{{ curcons }}</b> 
+<br>Number of books catalogued today = <b> {{ catt }} </b>
+<br>Number of books catalogued on this month ( {% now "M" %} ) = <b> {{ catmonth }} </b>
+<br>Number of books catalogued on current consignment = <b> {{ catcons }} </b>
+<br>Number of books catalogued in this year ( {% now "Y" %} ) = <b> {{ catyear }} </b>
+<br><br>
+
+Cataloguing by certain date:<br>
+
+<form action="{% url 'search_results' %}" method="get">
+  From <input name="q1" type="date" placeholder="Date from...">
+   to <input name="q2" type="date" placeholder="Date to...">
+  <input type="submit" value="Search">
+</form>
+<br>
+<h3>Detailed Statistics (from total of Cataloguing)</h3>
+
+Year of publishing || <a href="/catstat/yearpublish-chart/">Chart</a>
+<table border="1">
+
+    <tr>
+        <td><b>Year</b></td>
+        <td align="center"><b>Count</b></td>
+        <td align="center"><b>Percentage</b></td>
+    </tr>
+    {% for x in pubyear %}
+    <tr>
+               
+        <td><a href="detail_pubyear/{{ x.publish_year }}">{{ x.publish_year }}</a></td>
+        <td align="center">{{ x.pubyearcount }}</td>
+        <td align="center">{{ x.pubyearcount|as_percentage_of:bookcount }}</td>
+       
+       
+    </tr>
+    {% endfor %}
+    </table>
+
+
+<br>
+Type of publisher || <a href="/catstat/publisher-chart/">Chart</a>
+<table border="1">
+
+    <tr>
+        <td><b>Type of publisher</b></td>
+        <td align="center"><b>Count</b></td>
+        <td align="center"><b>Percentage</b></td>
+    </tr>
+    {% for x in typepub %}
+    <tr>
+               
+        <td><a href="detail_publisher/{{ x.publisher_type }}">{{ x.publisher_type }}</a></td>
+        <td align="center">{{ x.typepubcount }}</td>
+        <td align="center">{{ x.typepubcount|as_percentage_of:bookcount }}</td>
+       
+       
+    </tr>
+    {% endfor %}
+    </table>
+
+<br>
+Genre || <a href="/catstat/genre-chart/">Chart</a>
+    <table border="1">
+    
+        <tr>
+            <td><b>Genre</b></td>
+            <td align="center"><b>Count</b></td>
+            <td align="center"><b>Percentage</b></td>
+        </tr>
+        {% for x in typegenre %}
+        <tr>
+                   
+            <td><a href="detail_genre/{{ x.genre }}">{{ x.genre }}</a></td>
+            <td align="center">{{ x.typegenrecount }}</td>
+            <td align="center">{{ x.typegenrecount|as_percentage_of:bookcount }}</td>
+           
+           
+        </tr>
+        {% endfor %}
+        </table>
+
+<br>
+Language || <a href="/catstat/language-chart/">Chart</a>
+    <table border="1">
+    
+        <tr>
+            <td><b>Language</b></td>
+            <td align="center"><b>Count</b></td>
+            <td align="center"><b>Percentage</b></td>
+        </tr>
+        {% for x in lang %}
+        <tr>
+                   
+            <td><a href="detail_language/{{ x.language }}">{{ x.language }}</a></td>
+            <td align="center">{{ x.langcount }}</td>
+            <td align="center">{{ x.langcount|as_percentage_of:bookcount }}</td>
+           
+           
+        </tr>
+        {% endfor %}
+        </table>
+
+
+
+<br>
+Type of work || <a href="/catstat/typeofwork-chart/">Chart</a>
+                    <table border="1">
+                            
+                        <tr>
+                            <td><b>Type of work</b></td>
+                            <td align="center"><b>Count</b></td>
+                            <td align="center"><b>Percentage</b></td>
+                        </tr>
+                        {% for x in typework %}
+                            <tr>                     
+                            <td><a href="detail_worktypes/{{ x.work_type }}">{{ x.work_type }}</a></td>
+                                    <td align="center">{{ x.worktypecount }}</td>
+                                    <td align="center">{{ x.worktypecount|as_percentage_of:bookcount }}</td>
+                                   
+                                   
+                                </tr>
+                                {% endfor %}
+                                </table>
+
+<br>
+Copycat status || <a href="/catstat/copycat-chart/">Chart</a>
+<br>
+<table border="1">
+
+    <tr>
+        <td><b>Copycat?</b></td>
+        <td align="center"><b>Count</b></td>
+        <td align="center"><b>Percentage</b></td>
+    </tr>
+    {% for x in copycat %}
+    <tr>
+               
+        <td><a href="detail_copycat/{{ x.copycat }}">{{ x.copycat }}</a></td>
+        <td align="center">{{ x.copycatcount }}</td>
+        <td align="center">{{ x.copycatcount|as_percentage_of:bookcount }}</td>
+       
+       
+    </tr>
+    {% endfor %}
+    </table>
+<br>
+Volume || <a href="/catstat/volume-chart/">Chart</a>
+<br>
+<table border="1">
+
+    <tr>
+        <td><b>Volume</b></td>
+        <td align="center"><b>Count</b></td>
+        <td align="center"><b>Percentage</b></td>
+    </tr>
+    {% for x in vols %}
+    <tr>
+               
+        <td><a href="detail_volume/{{ x.volume }}">{{ x.volume }}</a></td>
+        <td align="center">{{ x.volcount }}</td>
+        <td align="center">{{ x.volcount|as_percentage_of:bookcount }}</td>
+       
+       
+    </tr>
+    {% endfor %}
+    </table>
+
+<br>
+ISBN || <a href="/catstat/isbn-chart/">Chart</a>
+<br>
+<table border="1">
+
+    <tr>
+        <td><b>Contains ISBN?</b></td>
+        <td align="center"><b>Count</b></td>
+        <td align="center"><b>Percentage</b></td>
+    </tr>
+    {% for x in isbn %}
+    <tr>
+               
+        <td><a href="detail_ISBN/{{ x.ISBN }}">{{ x.ISBN }}</a></td>
+        <td align="center">{{ x.isbncount }}</td>
+        <td align="center">{{ x.isbncount|as_percentage_of:bookcount }}</td>
+       
+       
+    </tr>
+    {% endfor %}
+    </table>
+
+    <br>
+    Size || <a href="/catstat/size-chart/">Chart</a>
+    <br>
+    <table border="1">
+    
+        <tr>
+            <td><b>Size</b></td>
+            <td align="center"><b>Count</b></td>
+            <td align="center"><b>Percentage</b></td>
+        </tr>
+        {% for x in booksize %}
+        <tr>
+                   
+            <td><a href="detail_size/{{ x.size }}">{{ x.size }}</a></td>
+            <td align="center">{{ x.sizecount }}</td>
+            <td align="center">{{ x.sizecount|as_percentage_of:bookcount }}</td>
+           
+           
+        </tr>
+        {% endfor %}
+        </table>
+
+<br>Type of authorship || <a href="/catstat/authorship-chart/">Chart</a>
+<table border="1">
+
+    <tr>
+        <td><b>Authorship</b></td>
+        <td align="center"><b>Count</b></td>
+        <td align="center"><b>Percentage</b></td>
+    </tr>
+    {% for x in typeaut %}
+    <tr>
+               
+        <td><a href="detail_authorship/{{ x.authorship_type }}">{{ x.authorship_type }}</a></td>
+        <td align="center">{{ x.typeautcount }}</td>
+        <td align="center">{{ x.typeautcount|as_percentage_of:bookcount }}</td>
+       
+       
+    </tr>
+    {% endfor %}
+    </table>
+    
+
+<br>
+Subject || <a href="/catstat/subject-chart/">Chart</a>
+    <table border="1">
+            
+        <tr>
+            <td><b>Subject</b></td>
+            <td align="center"><b>Count</b></td>
+            <td align="center"><b>Percentage</b></td>
+        </tr>
+        {% for x in subj %}
+            <tr>                     
+            <td><a href="detail_subject/{{ x.subject }}">{{ x.subject }}</a></td>
+                    <td align="center">{{ x.subjcount }}</td>
+                    <td align="center">{{ x.subjcount|as_percentage_of:bookcount }}</td>
+                   
+                   
+                </tr>
+                {% endfor %}
+                </table>
+

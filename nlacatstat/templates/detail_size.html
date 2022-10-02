@@ -1,0 +1,18 @@
+<table border="1">
+
+    <tr>
+        <td>No</td>
+        <td align="center">Title</td>
+        <td align="center">Size</td>
+    </tr>
+    
+    {% for x in detail_sizes %}
+    
+    <tr>
+        
+        <td>{{ forloop.counter }}</td>  
+        <td>{{ x.title }}</td>
+        <td>{{ x.size }}</td>
+    </tr>
+    {% endfor %}
+    </table>
