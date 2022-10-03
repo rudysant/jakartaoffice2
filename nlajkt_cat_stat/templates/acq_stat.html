@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block block1 %}
+<h3>Acquisition Statistics</h3>
+{% lorem %}
+{% load static %}
+<br><br><img src="{% static 'img/books_acq.jpg' %}">
+<br><br>
+<a href="/">Home</a>
+<br>
+<a href="/cat_stat/">Cataloguing Statistics</a>
+{% endblock %}

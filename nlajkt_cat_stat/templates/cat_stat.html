@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block block1 %}
+<h3>Cataloguing Statistics</h3>
+
+
+
+<h3>General Statistics</h3>
+Total of cataloguing (since 2 Sept 2022) : <b> {{ bookcount }} </b>
+<br>
+<br>Current consignment number : <b>{{ curcons }}</b> 
+<br>Number of books catalogued today : <b> {{ catt }} </b>
+<br>Number of books catalogued on this month ( {% now "M" %} ) : <b> {{ catmonth }} </b>
+<br>Number of books catalogued on current consignment : <b> {{ catcons }} </b>
+<br>Number of books catalogued in this year ( {% now "Y" %} ) : <b> {{ catyear }} </b>
+<br><br>
+Cataloguing by date range :<br>
+
+<form action="{% url 'search_results' %}" method="get">
+  From <input name="q1" type="date" placeholder="Date from...">
+   to <input name="q2" type="date" placeholder="Date to...">
+  <input type="submit" value="Search">
+</form>
+<br><br>
+
+<a href="/">Home</a>
+<br>
+<a href="/acq_stat/">Acquisition Statistics</a>
+{% endblock %}
