@@ -18,7 +18,7 @@ class Catalogues(models.Model):
         ('Multi-complete','Multi-complete'),
         ('Multi-incomplete','Multi-incomplete'),
         ], default='Single')
-    
+
     copycat = models.CharField(max_length=20, choices=[
         ('No','No'),
         ('Yes-partial','Yes-partial'),
@@ -45,12 +45,12 @@ class Catalogues(models.Model):
         ('Multi language','Multi language'),
         ('Unknown','Unknown')
         ], default='Indonesian')
-    
+
     bibliography = models.CharField(max_length=20, choices=[
         ('No','No'),
         ('Yes','Yes'),
         ], default='No')
-        
+
     indexx = models.CharField(max_length=20, choices=[
         ('No','No'),
         ('Yes','Yes'),
@@ -70,7 +70,7 @@ class Catalogues(models.Model):
         ('General non fiction','General non fiction'),
         ('Fiction-novel','Fiction-novel'),
         ('Fiction-short stories','Fiction-short stories'),
-	('Fiction-biographic','Fiction-biographic'),
+	    ('Fiction-biographic','Fiction-biographic'),
         ('Poetry','Poetry'),
         ('Folktales','Folktales'),
         ('Biography-single','Biography-single'),
@@ -112,6 +112,7 @@ class Catalogues(models.Model):
        ('300-Social-military','300-Social-military'),
        ('300-Social-education','300-Social-education'),
        ('300-Social-law','300-Social-law'),
+
        ('300-Social-human rights','300-Social-human rights'),
        ('400-Language-linguistics','400-Language-linguistics'),
        ('400-Language-sociolinguistics','400-Language-sociolinguistics'),

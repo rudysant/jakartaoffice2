@@ -1,0 +1,33 @@
+{% extends 'base.html'%}
+{% block block1 %}
+<center>
+    <table border=0>
+        <tr>
+            <td>|<a href="/">Home</a>|</td>
+            <td>|<a href="/cat_stat/">Cataloguing Statistics</a>|</td>
+        </tr>
+    </table>
+</center>
+<br>
+<center>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+<script>
+xval = {{ labels }};
+yval = {{ data }};
+new Chart("myChart", {
+  type: "bar",
+  data: {labels: xval, datasets: [{ data: yval }]},
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "Publishing year chart"
+    }
+  }
+});
+</script>
+</center>
+{% endblock %}
+
+

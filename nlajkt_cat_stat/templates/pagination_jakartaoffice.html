@@ -1,0 +1,30 @@
+{% if paging.has_previous %}
+  <a href="?{{ request.GET.urlencode }}&page={{ paging.previous_page_number }}">« Previous page</a>
+
+  {% if paging.number > 3 %}
+    <a href="?page=1">1</a>
+    {% if paging.number > 4 %}
+      <span>...</span>
+    {% endif %}
+  {% endif %}
+{% endif %}
+
+{% for num in paging.paginator.page_range %}
+  {% if paging.number == num %}
+    <a href="?{{ request.GET.urlencode }}&page={{ num }}">{{ num }}</a>
+  {% elif num > paging.number|add:'-3' and num < paging.number|add:'3' %}
+    <a href="?{{ request.GET.urlencode }}&page={{ num }}">{{ num }}</a>
+  {% endif %}
+{% endfor %}
+
+{% if paging.has_next %}
+  {% if paging.number < paging.paginator.num_pages|add:'-3' %}
+    <span>...</span>
+    <a href="?{{ request.GET.urlencode }}&page={{ paging.paginator.num_pages }}">{{ paging.paginator.num_pages }}</a>
+  {% elif paging.number < paging.paginator.num_pages|add:'-2' %}
+    <a href="?{{ request.GET.urlencode }}&page={{ paging.paginator.num_pages }}">{{ paging.paginator.num_pages }}</a>
+  {% endif %}
+
+  <a href="?{{ request.GET.urlencode }}&page={{ paging.next_page_number }}">Next Page »</a>
+{% endif %}
+of total <b> {{ paging.paginator.count }} </b> titles.

@@ -1,29 +1,31 @@
 {% extends 'base.html'%}
 {% block block1 %}
-<a href="/">Home</a>
+<center>
+    <table border=0>
+        <tr>
+            <td>|<a href="/">Home</a>|</td>
+            <td>|<a href="/cat_stat/">Cataloguing Statistics</a>|</td>
+        </tr>
+    </table>
+</center>
 
-<h3>Search Results</h3>
-
+<b>Titles catalogued in this period:</b>
+<br>
 <table border="1">
 
-    <tr>
+    <tr bgcolor='lightgrey'>
         <td>No</td>
         <td align="center">Title</td>
 		<td align="center">Entry date</td>
-        
     </tr>
-    
     {% for x in object_list %}
-    
     <tr>
-        
-        <td> {{ forloop.counter0|add:page_obj.start_index }} </td>
-        <td>{{ x.title }}</td>
-		<td>{{ x.entry_date }}</td>
-        
+       <td> {{ forloop.counter0|add:page_obj.start_index }} </td>
+       <td>{{ x.title }}</td>
+	   <td>{{ x.entry_date }}</td>
     </tr>
     {% endfor %}
-	</table>
+</table>
 <br>
 {% include "pagination3.html" %}
 {% endblock %}

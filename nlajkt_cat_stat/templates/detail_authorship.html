@@ -1,0 +1,36 @@
+{% extends 'base.html'%}
+{% block block1 %}
+<center>
+    <table border=0>
+        <tr>
+            <td>|<a href="/">Home</a>|</td>
+            <td>|<a href="/cat_stat/">Cataloguing Statistics</a>|</td>
+        </tr>
+    </table>
+</center>
+<br><br>
+<table border="1">
+    <tr bgcolor = 'grey'>
+      <b><td>No</td>
+        <td align="center">Title</td>
+        <td align="center">Authorship</td></b>
+    </tr>
+    {% for x in paging %}
+    <tr>
+        <td>{{ forloop.counter0|add:paging.start_index }}</td>
+        <td>{{ x.title }}</td>
+        <td>{{ x.authorship_type }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% include 'pagination_jakartaoffice.html' %}
+<br><br>
+<center>
+    <table border=0>
+        <tr>
+            <td>|<a href="/">Home</a>|</td>
+            <td>|<a href="/cat_stat/">Cataloguing Statistics</a>|</td>
+        </tr>
+    </table>
+</center>
+{% endblock %}
