@@ -8,8 +8,29 @@
         </tr>
     </table>
 </center>
+
 <h3>Acquisition Statistics</h3>
-{% lorem %}
+<h4>Consignments</h4>
+Titles acquired on current consignment number ({{ curcons }}) : <b>{{ total_proc }}</b>
+<br>
+Titles catalogued and end processed :<b> {{ bookcount }} </b> 
+<br>
+<h4>Supplier</h3>
+Supplier Statistics
+<table border="1">
+    <tr bgcolor='lightgrey'>
+        <td><b>Supplier</b></td>
+        <td align="center"><b>Count</b></td>
+        
+    </tr>
+    {% for x in vendor_count %}
+    <tr>
+        <td>{{ x.vendor }}</a></td>
+        <td align="center">{{ x.vendorcount }}</td>
+        
+    </tr>
+    {% endfor %}
+    </table>
 
 <br><br>
 <a href="/">Home</a>

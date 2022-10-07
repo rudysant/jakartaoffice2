@@ -1,8 +1,9 @@
 from cProfile import label
+from mimetypes import suffix_map
 from django.http import HttpResponse
-from django.db.models import Count, Q, Max
+from django.db.models import Count, Q, Max, Sum
 from django.template import loader
-from .models import Catalogues
+from .models import Catalogues, Acquisition
 import datetime
 from django.shortcuts import render
 from django.views.generic import ListView
@@ -176,4 +177,19 @@ def authorship_chart(request):
 
 
 def acq_stat(request):
-    return render(request, 'acq_stat.html')
+    acq = Acquisition.objects.all()
+    curcons = Catalogues.objects.aggregate(Max('consignment_no')).get('consignment_no__max')
+    total_proc = Acquisition.objects.aggregate(Sum('titles_proc')).get('titles_proc__sum')
+    bookcount = Catalogues.objects.all().count()
+
+    vendor_count = Acquisition.objects.values('vendor').annotate(vendorcount=Sum('titles_proc'))
+
+    context = {
+        'acq' : acq,
+        'curcons' : curcons,
+        'total_proc' : total_proc,
+        'bookcount' : bookcount,
+        'vendor_count' : vendor_count
+    }
+    template = loader.get_template('acq_stat.html')
+    return HttpResponse(template.render(context, request))
