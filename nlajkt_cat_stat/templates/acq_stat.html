@@ -1,19 +1,12 @@
 {% extends 'base.html' %}
 {% block block1 %}
-<center>
-    <table border=0>
-        <tr>
-            <td>|<a href="/">Home</a>|</td>
-            <td>|<a href="/cat_stat/">Cataloguing Statistics</a>|</td>
-        </tr>
-    </table>
-</center>
+
 
 <h3>Acquisition Statistics</h3>
 <h4>Consignments</h4>
 Titles acquired on current consignment number ({{ curcons }}) : <b>{{ total_proc }}</b>
 <br>
-Titles catalogued and end processed :<b> {{ bookcount }} </b> 
+Titles catalogued and end processed :<b> {{ bookcount }} </b>
 <br>
 <h4>Supplier</h3>
 Supplier Statistics
@@ -21,19 +14,17 @@ Supplier Statistics
     <tr bgcolor='lightgrey'>
         <td><b>Supplier</b></td>
         <td align="center"><b>Count</b></td>
-        
+
     </tr>
     {% for x in vendor_count %}
     <tr>
         <td>{{ x.vendor }}</a></td>
         <td align="center">{{ x.vendorcount }}</td>
-        
+
     </tr>
     {% endfor %}
     </table>
 
 <br><br>
-<a href="/">Home</a>
-<br>
-<a href="/cat_stat/">Cataloguing Statistics</a>
+
 {% endblock %}

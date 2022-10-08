@@ -1,43 +1,34 @@
 {% extends 'base.html' %}
 {% block block1 %}
 <center>
-    <table border=0>
-        <tr>
-            <td>|<a href="/">Home</a>|</td>
-            <td>|<a href="/acq_stat/">Acquisition Statistics</a>|</td>
-        </tr>
-    </table>
-</center>
+<br>
 <h3>Cataloguing Statistics</h3>
-
-
-
-<h3>General Statistics</h3>
-<table>
+<br>
+<h4>General Statistics</h4>
+<div class="container">
+<table style="width: auto;" class="table table-striped">
     <tr><td>Total of cataloguing (since 2 Sept 2022)</td><td> : </td><td><b> {{ bookcount }} </b></td></tr>
-    <tr><td></td><td></td><td></td></tr>
     <tr><td>Titles catalogued today</td><td> : </td><td><b> {{ catt }} </b></td></tr>
     <tr><td>Titles catalogued on current month ( {% now "F" %} )</td><td> : </td><td><b> {{ catmonth }} </b></td></tr>
     <tr><td>Titles catalogued in current year ( {% now "Y" %} )</td><td> : </td><td><b> {{ catyear }} </b></td></tr>
     <tr><td>Titles catalogued on current consignment no ({{ curcons }})</td><td> : </td><td><b> {{ catcons }} </b></td></tr>
 </table>
 
-<br><br>
 Cataloguing by date range :<br>
 
 <form action="{% url 'search_results' %}" method="get">
-  From <input name="q1" type="date" placeholder="Date from...">
-   to <input name="q2" type="date" placeholder="Date to...">
+  <b>From :</b><input name="q1" type="date" placeholder="Date from...">
+   <b>to :</b><input name="q2" type="date" placeholder="Date to...">
   <input type="submit" value="Search">
 </form>
 <br><br>
 <h3>Detailed Statistics</h3>
-
+<br>
 {% load percent_aut %}
 
 Year of publishing || <a href="/cat_stat/yearpublish-chart/">Chart</a>
 
-<table border="1">
+<table style="width: auto;" class="table table-striped">
     <tr bgcolor='lightgrey'>
         <td><b>Year</b></td>
         <td align="center"><b>Count</b></td>
@@ -52,9 +43,9 @@ Year of publishing || <a href="/cat_stat/yearpublish-chart/">Chart</a>
     {% endfor %}
     </table>
 
-<br><br>
+<br>
 Type of publisher || <a href="/cat_stat/publisher-chart/">Chart</a>
-<table border="1">
+<table style="width: auto;" class="table table-striped">
     <tr bgcolor='lightgrey'>
         <td><b>Type of publisher</b></td>
         <td align="center"><b>Count</b></td>
@@ -69,9 +60,9 @@ Type of publisher || <a href="/cat_stat/publisher-chart/">Chart</a>
     {% endfor %}
     </table>
 
-<br><br>
+<br>
 Genre || <a href="/cat_stat/genre-chart/">Chart</a>
-<table border="1">
+<table style="width: auto;" class="table table-striped">
     <tr bgcolor='lightgrey'>
         <td><b>Genre</b></td>
         <td align="center"><b>Count</b></td>
@@ -86,9 +77,9 @@ Genre || <a href="/cat_stat/genre-chart/">Chart</a>
     {% endfor %}
     </table>
 
-<br><br>
+<br>
 Language || <a href="/cat_stat/language-chart/">Chart</a>
-<table border="1">
+<table style="width: auto;" class="table table-striped">
     <tr bgcolor='lightgrey'>
         <td><b>Language</b></td>
         <td align="center"><b>Count</b></td>
@@ -103,9 +94,9 @@ Language || <a href="/cat_stat/language-chart/">Chart</a>
     {% endfor %}
     </table>
 
-<br><br>
+<br>
 Authorship || <a href="/cat_stat/authorship-chart/">Chart</a>
-<table border="1">
+<table style="width: auto;" class="table table-striped">
     <tr bgcolor='lightgrey'>
         <td><b>Authorship</b></td>
         <td align="center"><b>Count</b></td>
@@ -120,12 +111,40 @@ Authorship || <a href="/cat_stat/authorship-chart/">Chart</a>
     {% endfor %}
     </table>
 
-<center>
-    <table border=0>
-        <tr>
-            <td>|<a href="/">Home</a>|</td>
-            <td>|<a href="/acq_stat/">Acquisition Statistics</a>|</td>
+<br>
+Copycat status || <a href="/cat_stat/copycat-chart/">Chart</a>
+<table style="width: auto;" class="table table-striped">
+        <tr bgcolor='lightgrey'>
+            <td><b>Copycat status</b></td>
+            <td align="center"><b>Count</b></td>
+            <td align="center"><b>Percentage</b></td>
         </tr>
-    </table>
+        {% for x in copycat %}
+        <tr>
+            <td><a href="detail_copycat/{{ x.copycat }}">{{ x.copycat }}</a></td>
+            <td align="center">{{ x.copycatcount }}</td>
+            <td align="center">{{ x.copycatcount|as_percentage_of:bookcount }}</td>
+        </tr>
+        {% endfor %}
+        </table>
+
+<br>
+Subject || <a href="/cat_stat/subject-chart/">Chart</a>
+<table style="width: auto;" class="table table-striped">
+        <tr bgcolor='lightgrey'>
+            <td><b>Subject</b></td>
+            <td align="center"><b>Count</b></td>
+            <td align="center"><b>Percentage</b></td>
+            </tr>
+            {% for x in subj %}
+        <tr>
+            <td><a href="detail_subject/{{ x.subject }}">{{ x.subject }}</a></td>
+            <td align="center">{{ x.subjcount }}</td>
+                    <td align="center">{{ x.subjcount|as_percentage_of:bookcount }}</td>
+        </tr>
+        {% endfor %}
+        </table>
+<br><br>
+</div>
 </center>
 {% endblock %}

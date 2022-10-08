@@ -1,18 +1,11 @@
 {% extends 'base.html'%}
 {% block block1 %}
-<center>
-    <table border=0>
-        <tr>
-            <td>|<a href="/">Home</a>|</td>
-            <td>|<a href="/cat_stat/">Cataloguing Statistics</a>|</td>
-        </tr>
-    </table>
-</center>
-
+<br>
+<div class="container">
 <b>Titles catalogued in this period:</b>
 <br>
-<table border="1">
 
+<table style="width: auto;" class="table table-striped">
     <tr bgcolor='lightgrey'>
         <td>No</td>
         <td align="center">Title</td>
@@ -26,6 +19,8 @@
     </tr>
     {% endfor %}
 </table>
-<br>
-{% include "pagination3.html" %}
+
+</div>
+<center>{% include "pagination3.html" %}</center>
+<br><br>
 {% endblock %}

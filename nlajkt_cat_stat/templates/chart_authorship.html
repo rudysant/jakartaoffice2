@@ -1,15 +1,6 @@
 {% extends 'base.html'%}
 {% block block1 %}
-<center>
-    <table border=0>
-        <tr>
-            <td>|<a href="/">Home</a>|</td>
-            <td>|<a href="/cat_stat/">Cataloguing Statistics</a>|</td>
-        </tr>
-    </table>
-
-<br>
-
+<br><br><center>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
 <script>
@@ -28,4 +19,5 @@ new Chart("myChart", {
 });
 </script>
 </center>
+<br><br>
 {% endblock %}

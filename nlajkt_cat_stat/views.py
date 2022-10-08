@@ -28,6 +28,8 @@ def cat_stat(request):
     typegenre = Catalogues.objects.values('genre').annotate(typegenrecount=Count('genre'))
     lang = Catalogues.objects.values('language').annotate(langcount=Count('language'))
     typeaut = Catalogues.objects.values('authorship_type').annotate(typeautcount=Count('authorship_type'))
+    copycat = Catalogues.objects.values('copycat').annotate(copycatcount=Count('copycat'))
+    subj =Catalogues.objects.values('subject').annotate(subjcount=Count('subject'))
 
     context = {
         'catyear' : catyear,
@@ -41,6 +43,8 @@ def cat_stat(request):
         'typegenre' : typegenre,
         'lang' : lang,
         'typeaut' : typeaut,
+        'copycat' : copycat,
+        'subj' : subj,
       }
 
     template = loader.get_template('cat_stat.html')
@@ -129,6 +133,34 @@ def detail_authorship(request, authorship_type):
     context = {'paging' : paging,}
     return HttpResponse(template.render(context, request))
 
+def detail_copycat(request, copycat):
+    detail_copycat = Catalogues.objects.all().filter(copycat=copycat)
+    page = request.GET.get('page', 1)
+    paginator = Paginator(detail_copycat, 10)
+    try:
+        paging = paginator.page(page)
+    except PageNotAnInteger:
+        paging = paginator.page(1)
+    except EmptyPage:
+        paging = paginator.page(paginator.num_pages)
+    template = loader.get_template('detail_copycat.html')
+    context = {'paging' : paging,}
+    return HttpResponse(template.render(context, request))
+
+def detail_subject(request, subject):
+    detail_subject = Catalogues.objects.all().filter(subject=subject)
+    page = request.GET.get('page', 1)
+    paginator = Paginator(detail_subject, 10)
+    try:
+        paging = paginator.page(page)
+    except PageNotAnInteger:
+        paging = paginator.page(1)
+    except EmptyPage:
+        paging = paginator.page(paginator.num_pages)
+    template = loader.get_template('detail_subject.html')
+    context = {'paging' : paging,}
+    return HttpResponse(template.render(context, request))
+
 def yearpublish_chart(request):
     labels = []
     data = []
@@ -173,6 +205,24 @@ def authorship_chart(request):
       labels.append(xlang['authorship_type'])
       data.append(xlang['langcount'])
     return render(request, 'chart_authorship.html',{'labels' : labels,'data' : data,})
+
+def copycat_chart(request):
+    labels = []
+    data = []
+    queryset = Catalogues.objects.values('copycat').annotate(langcount=Count('copycat'))
+    for xlang in queryset:
+      labels.append(xlang['copycat'])
+      data.append(xlang['langcount'])
+    return render(request, 'chart_copycat.html',{'labels' : labels,'data' : data,})
+
+def subject_chart(request):
+    labels = []
+    data = []
+    queryset = Catalogues.objects.values('subject').annotate(langcount=Count('subject'))
+    for xlang in queryset:
+      labels.append(xlang['subject'])
+      data.append(xlang['langcount'])
+    return render(request, 'chart_subject.html',{'labels' : labels,'data' : data,})
 
 
 

@@ -1,0 +1,21 @@
+{% extends 'base.html'%}
+{% block block1 %}
+
+<br><br>
+<table style="width: auto;" class="table table-striped">
+    <tr bgcolor = 'grey'>
+      <b><td>No</td>
+        <td align="center">Title</td>
+        <td align="center">Subject</td></b>
+    </tr>
+    {% for x in paging %}
+    <tr>
+        <td>{{ forloop.counter0|add:paging.start_index }}</td>
+        <td>{{ x.title }}</td>
+        <td>{{ x.subject }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<center>{% include 'pagination_jakartaoffice.html' %}</center>
+<br><br>
+{% endblock %}
