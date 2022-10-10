@@ -1,16 +1,21 @@
 {% extends 'base.html' %}
 {% block block1 %}
-
-
-<h3>Acquisition Statistics</h3>
-<h4>Consignments</h4>
-Titles acquired on current consignment number ({{ curcons }}) : <b>{{ total_proc }}</b>
 <br>
-Titles catalogued and end processed :<b> {{ bookcount }} </b>
+<center>
+<b><h3>Acquisition Statistics</h3></b>
+<br>
+<h4>Consignments</h4>
+<table style="width: auto;" class="table table-striped">
+    <tr>
+        <td>Titles acquired on current consignment number ({{ curcons }})</td><td>:</td><td><b>{{ total_proc }}</b></td>
+    </tr>
+    <tr>
+        <td>Titles catalogued and end processed</td><td>:</td><td><b> {{ bookcount }} </b></td>
+    </tr>
+</table>
 <br>
 <h4>Supplier</h3>
-Supplier Statistics
-<table border="1">
+<table style="width: auto;" class="table table-striped">
     <tr bgcolor='lightgrey'>
         <td><b>Supplier</b></td>
         <td align="center"><b>Count</b></td>
@@ -26,5 +31,5 @@ Supplier Statistics
     </table>
 
 <br><br>
-
+</center>
 {% endblock %}
