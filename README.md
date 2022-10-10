@@ -7,7 +7,7 @@ Acquisition statistics
 - Acquisition
   - book source :
     - individual vendor
-    - book store / online store
+    - direct purchase book store / online store
     - field trip
     - G/E
     
@@ -17,4 +17,16 @@ Acquisition statistics
     - approved or rejected
     - if approved -> input to acq modul / finance
     - if rejected -> returned to vendor or discarded
+    
+  Tables for acq:
+  - acquisition
+  	- id
+  	- entry date
+  	- titles received
+  	- source
+  	- approved
+  	- rejected
+  	-
+  - vendor
+  - consignment
     
