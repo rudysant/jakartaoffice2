@@ -72,7 +72,7 @@ class Catalogues(models.Model):
         ('General non fiction','General non fiction'),
         ('Fiction-novel','Fiction-novel'),
         ('Fiction-short stories','Fiction-short stories'),
-	    ('Fiction-biographic','Fiction-biographic'),
+	('Fiction-biographic','Fiction-biographic'),
         ('Poetry','Poetry'),
         ('Folktales','Folktales'),
         ('Biography-single','Biography-single'),
@@ -114,7 +114,7 @@ class Catalogues(models.Model):
        ('300-Social-military','300-Social-military'),
        ('300-Social-education','300-Social-education'),
        ('300-Social-law','300-Social-law'),
-
+    	('300-Social-public administration','300-Social-public administration'),
        ('300-Social-human rights','300-Social-human rights'),
        ('400-Language-linguistics','400-Language-linguistics'),
        ('400-Language-sociolinguistics','400-Language-sociolinguistics'),

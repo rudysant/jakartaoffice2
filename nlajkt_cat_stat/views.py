@@ -21,7 +21,7 @@ def cat_stat(request):
     bookcount = Catalogues.objects.all().count()
     catyear = Catalogues.objects.filter(entry_date__year=thisyear).count()
     catmonth = Catalogues.objects.filter(entry_date__month=thismonth).count()
-#    catt = Catalogues.objects.filter(entry_date=today).count()
+    catt = Catalogues.objects.filter(entry_date=today).count()
     catcons = Catalogues.objects.filter(consignment_no = curcons).count()
     pubyear = Catalogues.objects.values('publish_year').order_by('-publish_year').annotate(pubyearcount=Count('publish_year'))
     typepub = Catalogues.objects.values('publisher_type').annotate(typepubcount=Count('publisher_type'))
@@ -33,7 +33,7 @@ def cat_stat(request):
 
     context = {
         'catyear' : catyear,
-#        'catt' : catt,
+        'catt' : catt,
         'bookcount' : bookcount,
         'catmonth' : catmonth,
         'curcons' : curcons,
