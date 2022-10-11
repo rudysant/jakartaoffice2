@@ -1,16 +1,32 @@
-### Hi there 👋
+Cataloguing statistic -- Done. 
+Planned update after new consignment starts
 
-<!--
-**nlajktstat/nlajktstat** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-
-Here are some ideas to get you started:
-
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+Acquisition statistics
+- Consignment
+  - acq no == start date == end date == titles == status 
+- Acquisition
+  - book source :
+    - individual vendor
+    - direct purchase book store / online store
+    - field trip
+    - G/E
+    
+ - acquisition flow
+    - book acquired
+    - checked against database
+    - approved or rejected
+    - if approved -> input to acq modul / finance
+    - if rejected -> returned to vendor or discarded
+    
+  Tables for acq:
+  - acquisition
+  	- id
+  	- entry date
+  	- titles received
+  	- source
+  	- approved
+  	- rejected
+  	-
+  - vendor
+  - consignment
+    
