@@ -72,13 +72,14 @@ class Catalogues(models.Model):
         ('General non fiction','General non fiction'),
         ('Fiction-novel','Fiction-novel'),
         ('Fiction-short stories','Fiction-short stories'),
-	('Fiction-biographic','Fiction-biographic'),
+	    ('Fiction-biographic','Fiction-biographic'),
         ('Poetry','Poetry'),
         ('Folktales','Folktales'),
         ('Biography-single','Biography-single'),
         ('Biography-collective','Biography-collective'),
         ('Biography-auto','Biography-auto'),
-        ('Dictionary','Dictionary')
+        ('Dictionaries','Dictionaries'),
+        ('Proceeding','Proceeding'),
         ], default='General non fiction')
 
     format = models.CharField(max_length=100, choices=[
@@ -105,6 +106,8 @@ class Catalogues(models.Model):
        ('200-Religions-general','200-Religions-general'),
        ('200-Religion-Islam','200-Religion-Islam'),
        ('200-Religion-Christianity','200-Religion-Christianity'),
+       ('200-Religion-Hinduism','200-Religion-Hinduism'),
+       ('200-Religion-Buddhism and others','200-Religion-Buddhism and others'),
        ('300-Social-anthropology and sociology','300-Social-anthropology and sociology'),
        ('300-Social-problems and services','300-Social-problems and services'),
        ('300-Social-politics','300-Social-politics'),
@@ -114,7 +117,7 @@ class Catalogues(models.Model):
        ('300-Social-military','300-Social-military'),
        ('300-Social-education','300-Social-education'),
        ('300-Social-law','300-Social-law'),
-    	('300-Social-public administration','300-Social-public administration'),
+       ('300-Social-public administration','300-Social-public administration'),
        ('300-Social-human rights','300-Social-human rights'),
        ('400-Language-linguistics','400-Language-linguistics'),
        ('400-Language-sociolinguistics','400-Language-sociolinguistics'),
