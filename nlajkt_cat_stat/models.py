@@ -111,7 +111,8 @@ class Catalogues(models.Model):
        ('300-Social-anthropology and sociology','300-Social-anthropology and sociology'),
        ('300-Social-problems and services','300-Social-problems and services'),
        ('300-Social-politics','300-Social-politics'),
-       ('300-Social-economics','300-Social-economics'),
+       ('300-Social-economics-general','300-Social-economics-general'),
+       ('300-Social-economics-resources','300-Social-economics-resources'),
        ('300-Social-economics-policy and development','300-Social-economics-policy and development'),
        ('300-Social-economics-financial and monetary','300-Social-economics-financial and monetary'),
        ('300-Social-economics-industries and production','300-Social-economics-industries and production'),
@@ -136,8 +137,8 @@ class Catalogues(models.Model):
        ('900-History-world','900-History-world'),
        ('900-History-Indonesia','900-History-Indonesia'),
        ('900-Geography and travel','900-Geography and travel'),
-        ('900-Biography','900-Biography')
-        ], null=True)
+       ('900-Biography','900-Biography')
+       ], null=True)
 
 class Acquisition(models.Model):
     entry_date = models.DateField()
