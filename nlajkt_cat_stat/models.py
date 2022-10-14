@@ -1,4 +1,5 @@
 from email.policy import default
+from random import choices
 
 from django.db import models
 
@@ -153,3 +154,26 @@ class Acquisition(models.Model):
         ('Field trip', 'Field trip'),
         ('G/E', 'G/E')
         ],)
+
+class Book_source(models.Model):
+    name = models.CharField(max_length=100)
+    category = models.CharField(max_length=100, choices=[
+        ('Regular supplier','Regular supplier'),
+        ('Book store','Book store'),
+        ('Field trip','Field trip')   
+    ],)
+    
+    def __str__(self):
+        return self.name
+
+class Acquisition2(models.Model):
+    entry_date = models.DateField()
+    cons_no = models.IntegerField(default=461)
+    titles_proc = models.IntegerField()
+    vendor = models.ForeignKey(Book_source, on_delete=models.CASCADE)
+    value = models.IntegerField(default=0) 
+    
+    
+    
+    
+    
