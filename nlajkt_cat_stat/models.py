@@ -160,12 +160,13 @@ class Book_source(models.Model):
     category = models.CharField(max_length=100, choices=[
         ('Regular supplier','Regular supplier'),
         ('Book store','Book store'),
-        ('Field trip','Field trip')   
+        ('Field trip','Field trip'),
+        ('Gift/Exchange','Gift/Exchange')
     ],)
-    
+
     def __str__(self):
         return self.name
-    
+
 class Consignment(models.Model):
     consign_no = models.IntegerField()
     start_date = models.DateField()
@@ -181,10 +182,10 @@ class Acquisition2(models.Model):
     titles_proc = models.IntegerField()
     vendor = models.ForeignKey(Book_source, on_delete=models.CASCADE)
     value = models.IntegerField(default=0)
-    
 
-    
-    
-    
-    
-    
+
+
+
+
+
+
