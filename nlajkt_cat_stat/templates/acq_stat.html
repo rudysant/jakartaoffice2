@@ -4,17 +4,42 @@
 <center>
 <b><h3>Acquisition Statistics</h3></b>
 <br>
-<h4>Consignments</h4>
+<h4>Monograph Acquisition</h4>
 <table style="width: auto;" class="table table-striped">
     <tr>
         <td>Titles acquired on current consignment number ({{ curcons }})</td><td>:</td><td><b>{{ total_proc }}</b></td>
     </tr>
     <tr>
-    <td>Total expense for acquired titles (in IDR)</td><td>:</td><td><b> {{ total_expense }} </b></td>
+        <td>Titles on cataloguing queue </td><td>:</td><td><b> {{ uncat }} </b></td>
     </tr>
     <tr>
-        <td>Titles catalogued and end processed</td><td>:</td><td><b> {{ bookcount }} </b></td>
+    <td>Total purchase (in IDR)</td><td>:</td><td><b> {{ total_expense }} </b></td>
     </tr>
+</table>
+
+<br>
+<h5>Shipment</h5>
+<table style="width: auto;" class="table table-striped">
+    <tr bgcolor='lightgrey'>
+        <td align="center"><b>Consignment no</b></td>
+        <td align="center"><b>Start date</b></td>
+        <td align="center"><b>End date</b></td>
+        <td align="center"><b>Status</b></td>
+        <td align="center"><b>Boxes</b></td>
+        <td align="center"><b>Total weight</b></td>
+        <td align="center"><b>Shipment date</b></td>
+    </tr>
+    {% for x in cons %}
+    <tr>
+        <td align="center">{{ x.consign_no }}</td>
+        <td align="center">{{ x.start_date }}</td>
+        <td align="center">{{ x.end_date }}</td>
+        <td align="center">{{ x.status }}</td>
+        <td align="center">{{ x.box_count }}</td>
+        <td align="center">{{ x.total_weight }}</td>
+        <td align="center">{{ x.shipment_date }}</td>
+    </tr>
+    {% endfor %}
 </table>
 <br>
 
@@ -23,38 +48,29 @@
     <tr bgcolor='lightgrey'>
         <td><b>Supplier's name</b></td>
         <td align="center"><b>Titles count</b></td>
-        
-
     </tr>
     {% for x in vendor_count %}
-   
     <tr>
         <td>{{ x.vendor__name }}</a></td>
         <td align="center">{{ x.vendorcount }}</td>
-        
-
     </tr>
-    
     {% endfor %}
     </table>
+
 <br>    
 <h5>Acquisition by supplier's categories</h5>
 <table style="width: auto;" class="table table-striped">
     <tr bgcolor='lightgrey'>
         <td><b>Supplier's category</b></td>
         <td align="center"><b>Titles count</b></td>
-
     </tr>
     {% for x in vendor_cat %}
-   
     <tr>
         <td>{{ x.vendor__category }}</a></td>
         <td align="center">{{ x.vendorcount }}</td>
-
     </tr>
-    
     {% endfor %}
-    </table>
+</table>
 
 <br><br>
 </center>

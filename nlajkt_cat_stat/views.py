@@ -3,7 +3,7 @@ from mimetypes import suffix_map
 from django.http import HttpResponse
 from django.db.models import Count, Q, Max, Sum
 from django.template import loader
-from .models import Catalogues, Acquisition2, Book_source
+from .models import Catalogues, Acquisition2, Book_source, Consignment
 import datetime
 from django.shortcuts import render
 from django.views.generic import ListView
@@ -224,15 +224,14 @@ def subject_chart(request):
       data.append(xlang['langcount'])
     return render(request, 'chart_subject.html',{'labels' : labels,'data' : data,})
 
-
-
 def acq_stat(request):
     acq = Acquisition2.objects.all()
+    cons = Consignment.objects.all()
     curcons = Catalogues.objects.aggregate(Max('consignment_no')).get('consignment_no__max')
     total_proc = Acquisition2.objects.aggregate(Sum('titles_proc')).get('titles_proc__sum')
     total_expense = Acquisition2.objects.aggregate(Sum('value')).get('value__sum')
     bookcount = Catalogues.objects.all().count()
-
+    uncat = total_proc - bookcount
     vendor_count = Acquisition2.objects.values('vendor__name').annotate(vendorcount=Sum('titles_proc'))
     vendor_cat = Acquisition2.objects.values('vendor__category').annotate(vendorcount=Sum('titles_proc'))
 
@@ -243,7 +242,9 @@ def acq_stat(request):
         'bookcount' : bookcount,
         'vendor_count' : vendor_count,
         'vendor_cat' : vendor_cat,
-        'total_expense' : total_expense
+        'total_expense' : total_expense,
+        'cons' : cons,
+        'uncat' : uncat
     }
     template = loader.get_template('acq_stat.html')
     return HttpResponse(template.render(context, request))

@@ -165,13 +165,24 @@ class Book_source(models.Model):
     
     def __str__(self):
         return self.name
+    
+class Consignment(models.Model):
+    consign_no = models.IntegerField()
+    start_date = models.DateField()
+    end_date = models.DateField(blank=True, null=True)
+    status = models.CharField(max_length=50, default='In process')
+    box_count = models.IntegerField(default=0)
+    total_weight = models.IntegerField(default=0)
+    shipment_date = models.DateField(blank=True, null=True)
 
 class Acquisition2(models.Model):
     entry_date = models.DateField()
     cons_no = models.IntegerField(default=461)
     titles_proc = models.IntegerField()
     vendor = models.ForeignKey(Book_source, on_delete=models.CASCADE)
-    value = models.IntegerField(default=0) 
+    value = models.IntegerField(default=0)
+    
+
     
     
     
