@@ -24,8 +24,8 @@ class Catalogues(models.Model):
 
     copycat = models.CharField(max_length=20, choices=[
         ('No','No'),
-        ('Yes-partial','Yes-partial'),
-        ('Yes-full','Yes-full'),
+        ('Partial copycat','Partial copycat'),
+        ('Full copycat','Full copycat'),
         ], default='No')
 
     ISBN = models.CharField(max_length=20, choices=[
@@ -141,19 +141,6 @@ class Catalogues(models.Model):
        ('900-Biography','900-Biography')
        ], null=True)
 
-class Acquisition(models.Model):
-    entry_date = models.DateField()
-    cons_no = models.IntegerField(default=461)
-    titles_proc = models.IntegerField()
-    vendor = models.CharField(max_length = 100, choices=[
-        ('Yukendro','Yukendro'),
-        ('Hariyanto','Hariyanto'),
-        ('Meison/Syaiful','Meison/Syaiful'),
-        ('Fuad', 'Fuad'),
-        ('Komari','Komari'),
-        ('Field trip', 'Field trip'),
-        ('G/E', 'G/E')
-        ],)
 
 class Book_source(models.Model):
     name = models.CharField(max_length=100)
