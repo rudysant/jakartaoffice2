@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% block block1 %}
+
+{% load humanize %}
+
 <br>
 <center>
 <b><h3>Acquisition Statistics</h3></b>
@@ -13,7 +16,7 @@
         <td>Titles on cataloguing queue </td><td>:</td><td><b> {{ uncat }} </b></td>
     </tr>
     <tr>
-    <td>Total purchase (in IDR)</td><td>:</td><td><b> {{ total_expense }} </b></td>
+    <td>Total purchase (in IDR)</td><td>:</td><td><b> {{ total_expense|intcomma }} </b></td>
     </tr>
 </table>
 

@@ -29,8 +29,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['jakartaoffice.pythonanywhere.com', 'localhost', '127.0.0.1']
 
-USE_THOUSAND_SEPARATOR = True
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'nlajkt_cat_stat',
 ]
 
