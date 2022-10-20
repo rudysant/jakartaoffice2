@@ -12,17 +12,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.CreateModel(
-            name='Acquisition',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('entry_date', models.DateField()),
-                ('cons_no', models.IntegerField(default=461)),
-                ('titles_proc', models.IntegerField()),
-                ('vendor', models.CharField(choices=[('Yukendro', 'Yukendro'), ('Hariyanto', 'Hariyanto'), ('Meison/Syaiful', 'Meison/Syaiful'), ('Fuad', 'Fuad'), ('Komari', 'Komari'), ('Field trip', 'Field trip'), ('G/E', 'G/E')], max_length=100)),
-            ],
-        ),
-        migrations.CreateModel(
+            migrations.CreateModel(
             name='Book_source',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),

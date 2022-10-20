@@ -45,8 +45,8 @@ class Catalogues(models.Model):
         ('Indonesian','Indonesian'),
         ('English','English'),
         ('Indonesian local','Indonesian local'),
-        ('Multi language','Multi language'),
-        ('Unknown','Unknown')
+        ('Multilingual','Multilingual'),
+        ('Others','Others')
         ], default='Indonesian')
 
     bibliography = models.CharField(max_length=20, choices=[
@@ -172,26 +172,7 @@ class Acquisition2(models.Model):
 
 class Trip_place(models.Model):
     place_name = models.CharField(max_length=100)
-    place_category = models.CharField(max_length=100, choices=[
-        ('Government office','Government Office'),
-        ('NGO office','NGO Office'),
-        ('Book store','Book store'),
-        ('Book fair','Book fair'),
-        ('Personal','Personal')
-        ],)
-    address = models.CharField(max_length=200)
 
-class FieldTrip(models.Model):
-    plan_date = models.DateField()
-    place = models.ForeignKey(Trip_place, on_delete=models.CASCADE)
-    visit_date = models.DateField(blank=True, null=True)
-    titles_acq = models.IntegerField(default=0)
-    status = models.CharField(max_length=50, choices=[
-        ('Scheduled','Scheduled'),
-        ('Completed','Completed'),
-        ('Postponed','Postponed'),
-        ('Canceled','Canceled')
-    ], default='Scheduled')
 
 
 
