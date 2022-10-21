@@ -10,7 +10,7 @@
 <h4>Monograph Acquisition</h4>
 <table style="width: auto;" class="table table-striped">
     <tr>
-        <td>Titles acquired on current consignment number ({{ curcons }})</td><td>:</td><td><b>{{ total_proc }}</b></td>
+        <td>Titles acquired and processed on current consignment number ({{ curcons }})</td><td>:</td><td><b>{{ total_proc }}</b></td>
     </tr>
     <tr>
         <td>Titles on cataloguing queue </td><td>:</td><td><b> {{ uncat }} </b></td>
@@ -41,6 +41,28 @@
         <td align="center">{{ x.box_count }}</td>
         <td align="center">{{ x.total_weight }}</td>
         <td align="center">{{ x.shipment_date }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+
+<br>
+<h5>Field Trip</h5>
+<table style="width: auto;" class="table table-striped">
+    <tr bgcolor='lightgrey'>
+        <td align="center"><b>Planned trip date</b></td>
+        <td align="center"><b>Place</b></td>
+        <td align="center"><b>Actual trip date</b></td>
+        <td align="center"><b>Titles acquired</b></td>
+        <td align="center"><b>Status</b></td>
+    </tr>
+    {% for x in ftrip %}
+    <tr>
+        <td align="center">{{ x.planned_date }}</td>
+        <td align="center">{{ x.place }}</td>
+        <td align="center">{{ x.visit_date }}</td>
+        <td align="center">{{ x.titles_acquired }}</td>
+        <td align="center">{{ x.status }}</td>
     </tr>
     {% endfor %}
 </table>
