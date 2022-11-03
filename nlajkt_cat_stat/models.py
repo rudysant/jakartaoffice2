@@ -5,7 +5,7 @@ from django.db import models
 
 class Catalogues(models.Model):
     entry_date = models.DateField()
-    consignment_no = models.IntegerField(default=461)
+    consignment_no = models.IntegerField(default=462)
     title = models.TextField()
 
     work_type = models.CharField(max_length=20, choices=[
@@ -112,12 +112,13 @@ class Catalogues(models.Model):
        ('300-Social-anthropology and sociology','300-Social-anthropology and sociology'),
        ('300-Social-problems and services','300-Social-problems and services'),
        ('300-Social-politics','300-Social-politics'),
+       ('300-Social-international relations','300-Social-international relations'),
        ('300-Social-economics-general','300-Social-economics-general'),
        ('300-Social-economics-resources','300-Social-economics-resources'),
        ('300-Social-economics-policy and development','300-Social-economics-policy and development'),
        ('300-Social-economics-financial and monetary','300-Social-economics-financial and monetary'),
        ('300-Social-economics-industries and production','300-Social-economics-industries and production'),
-       ('300-Social-macroeconomics','300-Social-macroeconomics'),
+       ('300-Social-economics-macro','300-Social-economics-macro'),
        ('300-Social-culture','300-Social-culture'),
        ('300-Social-military','300-Social-military'),
        ('300-Social-education','300-Social-education'),
@@ -141,6 +142,12 @@ class Catalogues(models.Model):
        ('900-Biography','900-Biography')
        ], null=True)
 
+class Cat_cons(models.Model):
+    consign_no = models.IntegerField()
+    start_date = models.DateField()
+    end_date = models.DateField(blank=True, null=True)
+    new_title = models.IntegerField(default=0)
+    add_vol = models.IntegerField(default=0)
 
 class Book_source(models.Model):
     name = models.CharField(max_length=100)
@@ -158,19 +165,23 @@ class Consignment(models.Model):
     consign_no = models.IntegerField()
     start_date = models.DateField()
     end_date = models.DateField(blank=True, null=True)
-    status = models.CharField(max_length=50, default='In process')
+    status = models.CharField(max_length=50, choices=[
+        ('Started','Started'),
+        ('In process','In process'),
+        ('Completed','Completed'),
+        ], default='In process')
     box_count = models.IntegerField(default=0)
     total_weight = models.IntegerField(default=0)
     shipment_date = models.DateField(blank=True, null=True)
 
-class Acquisition2(models.Model):
+class Acquisition(models.Model):
     entry_date = models.DateField()
-    cons_no = models.IntegerField(default=461)
+    cons_no = models.IntegerField(default=462)
     titles_proc = models.IntegerField()
     vendor = models.ForeignKey(Book_source, on_delete=models.CASCADE)
     value = models.IntegerField(default=0)
 
-class Tripplace(models.Model):
+class Trip_place(models.Model):
     place_name = models.CharField(max_length = 100)
     address = models.CharField(max_length = 200)
     phone = models.CharField(max_length=50, blank=True, null=True)
@@ -187,9 +198,9 @@ class Tripplace(models.Model):
     def __str__(self):
         return self.place_name
 
-class Fieldtrip(models.Model):
+class Field_trip(models.Model):
     planned_date = models.DateField()
-    place = models.ForeignKey(Tripplace, on_delete=models.CASCADE)
+    place = models.ForeignKey(Trip_place, on_delete=models.CASCADE)
     visit_date = models.DateField(blank=True, null=True)
     titles_acquired = models.IntegerField(default=0)
     status = models.CharField(max_length = 100, choices=[

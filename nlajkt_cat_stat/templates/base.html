@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="container-fluid bg-primary text-white">
-        <center><h1>Jakarta Office Statistics</h1>
+        <center><b></b><h1>Jakarta Office Statistics</h1></b>
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <div class="container-fluid">
                 <ul class="navbar-nav">
@@ -24,10 +24,36 @@
     </div></center>
 
 {% block block1 %}
+<br><br><br><br>
+{% load static %}
+<div class="container mt-3">
+  <h1>Statistic snapshots</h1>
+  <p>Interesting facts:</p>
+  <blockquote class="blockquote">
+    <p><i>"41.3% of acquired titles, published in 2022 compared to 20.3% published in 2021 ...</p>
+    <p>while commercial publications dominate by 72.6% off all monthly purchase."</i></p><br>
+    <footer class="blockquote-footer"><a href="{% url 'cat_stat' %}">Click for more facts!</a></footer>
+  </blockquote>
+  <blockquote class="blockquote">
+    <p>Or use mobile phone to scan these QR codes below:</p>
+  <p><img src = "{% static 'img/jakartaoffice_cat.png' %}"> or <img src = "{% static 'img/jakartaoffice_acq.png' %}"> </p>
+  </blockquote>
+</div>
+<br><br><center>
+<h1>Books of the month</h1>
+  <p></p>
+  <blockquote class="blockquote">
+    <p><img src = "{% static 'img/kisahex.JPG' %}" class="rounded-circle" alt="Cinque Terre" width="304" height="236">
+       <img src = "{% static 'img/etnisitas.JPG' %}" class="rounded-circle" alt="Cinque Terre" width="304" height="236">
+       <img src = "{% static 'img/membumikan.JPG' %}" class="rounded-circle" alt="Cinque Terre" width="304" height="236"></p>
 
-<h4>Introduction</h4>
-{% lorem 7 p %}
+  </blockquote>
+</div> </center>
+<br><br>
 
+<br><br><center>
+
+</center>
 {% endblock %}
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container-fluid">

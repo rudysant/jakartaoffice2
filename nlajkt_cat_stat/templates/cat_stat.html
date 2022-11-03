@@ -7,21 +7,49 @@
 <h4>General Statistics</h4>
 <div class="container">
 <table style="width: auto;" class="table table-striped">
-    <tr><td>Total of cataloguing (since 2 Sept 2022)</td><td> : </td><td><b> {{ bookcount }} </b></td></tr>
+    <tr><td>Total of cataloguing (since 2 September 2022)</td><td> : </td><td><b> {{ bookcount }} </b></td></tr>
     <tr><td>Titles catalogued today<td>:</td></td><td><b>{{ catt }}</b></td></tr>
     <tr><td>Titles catalogued on current month ( {% now "F" %} )</td><td> : </td><td><b> {{ catmonth }} </b></td></tr>
     <tr><td>Titles catalogued in current year ( {% now "Y" %} )</td><td> : </td><td><b> {{ catyear }} </b></td></tr>
-    <tr><td>Titles catalogued on current consignment no ({{ curcons }})</td><td> : </td><td><b> {{ catcons }} </b></td></tr>
+    <tr><td>Titles catalogued on current consignment number ({{ curcons }})</td><td> : </td><td><b> {{ catcons }} </b></td></tr>
+    <tr><td>Titles catalogued by date range</td><td> : </td></tr>
 </table>
 
-Cataloguing by date range :<br>
-
 <form action="{% url 'search_results' %}" method="get">
-  <b>From :</b><input name="q1" type="date" placeholder="Date from...">
-   <b>to :</b><input name="q2" type="date" placeholder="Date to...">
+  <b>From : </b><input name="q1" type="date" placeholder="Date from...">
+   <b>to : </b><input name="q2" type="date" placeholder="Date to...">
   <input type="submit" value="Search">
 </form>
 <br><br>
+<h4>Search titles by keywords</h4>
+<form action="{% url 'search_title_results' %}" method="get">
+  <input name="q1" type="text" placeholder="keyword 1"> <b>and</b>
+  <input name="q2" type="text" placeholder="keyword 2">
+  <input type="submit" value="Search">
+</form>
+<br><br>
+
+<h4>Cataloguing by consignments</h4>
+<table style="width: auto;" class="table table-striped">
+    <tr bgcolor='lightgrey'>
+        <td align="center"><b>Consignment no</b></td>
+        <td align="center"><b>Start</b></td>
+        <td align="center"><b>Finish</b></td>
+        <td align="center"><b>New titles</b></td>
+        <td align="center"><b>Added volumes</b></td>
+
+    </tr>
+    {% for x in cat_cons %}
+    <tr>
+        <td align="center">{{ x.consign_no }}</td>
+        <td align="center">{{ x.start_date }}</td>
+        <td align="center">{{ x.end_date }}</td>
+        <td align="center">{{ x.new_title }}</td>
+        <td align="center">{{ x.add_vol }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
 <h3>Detailed Statistics</h3>
 <br>
 {% load percent_aut %}
@@ -34,13 +62,18 @@ Year of publishing || <a href="/cat_stat/yearpublish-chart/">Chart</a>
         <td align="center"><b>Count</b></td>
         <td align="center"><b>Percentage</b></td>
     </tr>
-    {% for x in pubyear %}
+    {% for x in pubyear|slice:"10" %}
     <tr>
         <td><a href="detail_pubyear/{{ x.publish_year }}">{{ x.publish_year }}</a></td>
         <td align="center">{{ x.pubyearcount }}</td>
         <td align="center">{{ x.pubyearcount|as_percentage_of:bookcount }}</td>
     </tr>
     {% endfor %}
+    <tr>
+        <td align="center"> Older than 10 years</td>
+        <td align="center">{{ oldpub }}</td>
+        <td align="center">{{ oldpub|as_percentage_of:bookcount }}</td>
+    </tr>
     </table>
 
 <br>
