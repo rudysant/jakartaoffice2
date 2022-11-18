@@ -1,7 +1,7 @@
 {% extends 'base.html'%}
 {% block block1 %}
 
-<br><br>
+<br><br><center>{
 <table style="width: auto;" class="table table-striped">
     <tr bgcolor = 'grey'>
       <b><td>No</td>
@@ -16,7 +16,7 @@
     </tr>
     {% endfor %}
 </table>
-<center>{% include 'pagination_jakartaoffice.html' %}</center>
+% include 'pagination_jakartaoffice.html' %}</center>
 <br><br>
 
 {% endblock %}

@@ -13,22 +13,25 @@
     <tr><td>Titles catalogued in current year ( {% now "Y" %} )</td><td> : </td><td><b> {{ catyear }} </b></td></tr>
     <tr><td>Titles catalogued on current consignment number ({{ curcons }})</td><td> : </td><td><b> {{ catcons }} </b></td></tr>
     <tr><td>Titles catalogued by date range</td><td> : </td></tr>
-</table>
+
+<tr><td>
 
 <form action="{% url 'search_results' %}" method="get">
   <b>From : </b><input name="q1" type="date" placeholder="Date from...">
    <b>to : </b><input name="q2" type="date" placeholder="Date to...">
   <input type="submit" value="Search">
-</form>
-<br><br>
-<h4>Search titles by keywords</h4>
+</form></td></tr>
+
+<tr><td>Titles catalogued by keywords</td><td> : </td></tr>
+
+<tr><td>
 <form action="{% url 'search_title_results' %}" method="get">
   <input name="q1" type="text" placeholder="keyword 1"> <b>and</b>
   <input name="q2" type="text" placeholder="keyword 2">
   <input type="submit" value="Search">
-</form>
-<br><br>
-
+</form></td></tr>
+</table>
+<br>
 <h4>Cataloguing by consignments</h4>
 <table style="width: auto;" class="table table-striped">
     <tr bgcolor='lightgrey'>
