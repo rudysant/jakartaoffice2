@@ -74,6 +74,7 @@ class Catalogues(models.Model):
         ('Fiction-novel','Fiction-novel'),
         ('Fiction-short stories','Fiction-short stories'),
 	    ('Fiction-biographic','Fiction-biographic'),
+	    ('Fiction-drama','Fiction-drama'),
         ('Poetry','Poetry'),
         ('Folktales','Folktales'),
         ('Biography-single','Biography-single'),
@@ -91,7 +92,7 @@ class Catalogues(models.Model):
         ('Map-single','Map-single'),
         ('Map-atlas','Map-atlas'),
         ('Ephemera','Ephemera')
-        ], default='Book')
+        ], default='Book-printed')
 
     size = models.CharField(max_length=10, choices=[
         ('YY','YY'),
@@ -100,9 +101,9 @@ class Catalogues(models.Model):
         ],default='YY')
 
     subject = models.CharField(max_length=50, choices=[
-       ('000-Generalities','100-Generalities'),
-       ('000-Library science','100-Library science'),
-       ('000-Journalism and media','100-Journalism and media'),
+       ('000-Generalities','000-Generalities'),
+       ('000-Library science','000-Library science'),
+       ('000-Journalism and media','000-Journalism and media'),
        ('100-Philosophy and ethics','100-Philosophy and ethics'),
        ('200-Religions-general','200-Religions-general'),
        ('200-Religion-Islam','200-Religion-Islam'),
@@ -114,11 +115,11 @@ class Catalogues(models.Model):
        ('300-Social-politics','300-Social-politics'),
        ('300-Social-international relations','300-Social-international relations'),
        ('300-Social-economics-general','300-Social-economics-general'),
+       ('300-Social-economics-management','300-Social-economics-management'),
        ('300-Social-economics-resources','300-Social-economics-resources'),
        ('300-Social-economics-policy and development','300-Social-economics-policy and development'),
        ('300-Social-economics-financial and monetary','300-Social-economics-financial and monetary'),
        ('300-Social-economics-industries and production','300-Social-economics-industries and production'),
-       ('300-Social-economics-macro','300-Social-economics-macro'),
        ('300-Social-culture','300-Social-culture'),
        ('300-Social-military','300-Social-military'),
        ('300-Social-education','300-Social-education'),
@@ -134,6 +135,7 @@ class Catalogues(models.Model):
        ('700-Arts-visual','700-Arts-visual'),
        ('700-Arts-performance','700-Arts-performance'),
        ('700-Arts-music','700-Arts-music'),
+       ('700-Architecture','700-Architecture'),
        ('800-Literature-general','800-Literature-general'),
        ('800-Literature-fiction and poetry','800-Literature-fiction and poetry'),
        ('900-History-world','900-History-world'),
