@@ -5,7 +5,7 @@ from django.db import models
 
 class Catalogues(models.Model):
     entry_date = models.DateField()
-    consignment_no = models.IntegerField(default=462)
+    consignment_no = models.IntegerField(default=464)
     title = models.TextField()
 
     work_type = models.CharField(max_length=20, choices=[
@@ -23,10 +23,10 @@ class Catalogues(models.Model):
         ], default='Single')
 
     copycat = models.CharField(max_length=20, choices=[
-        ('No','No'),
+        ('Original','Original'),
         ('Partial copycat','Partial copycat'),
         ('Full copycat','Full copycat'),
-        ], default='No')
+        ], default='Original')
 
     ISBN = models.CharField(max_length=20, choices=[
         ('No','No'),
@@ -82,6 +82,7 @@ class Catalogues(models.Model):
         ('Biography-auto','Biography-auto'),
         ('Dictionaries','Dictionaries'),
         ('Proceeding','Proceeding'),
+        ('Comic, cartoon','Comic, cartoon'),
         ], default='General non fiction')
 
     format = models.CharField(max_length=100, choices=[
@@ -124,6 +125,7 @@ class Catalogues(models.Model):
        ('300-Social-military','300-Social-military'),
        ('300-Social-education','300-Social-education'),
        ('300-Social-law','300-Social-law'),
+       ('300-Social-transportation','300-Social-transportation'),
        ('300-Social-public administration','300-Social-public administration'),
        ('300-Social-human rights','300-Social-human rights'),
        ('400-Language-linguistics','400-Language-linguistics'),
@@ -138,7 +140,7 @@ class Catalogues(models.Model):
        ('700-Architecture','700-Architecture'),
        ('800-Literature-general','800-Literature-general'),
        ('800-Literature-fiction and poetry','800-Literature-fiction and poetry'),
-       ('900-History-world','900-History-world'),
+       ('900-History-general','900-History-general'),
        ('900-History-Indonesia','900-History-Indonesia'),
        ('900-Geography and travel','900-Geography and travel'),
        ('900-Biography','900-Biography')
@@ -166,7 +168,7 @@ class Book_source(models.Model):
 class Consignment(models.Model):
     consign_no = models.IntegerField()
     start_date = models.DateField()
-    end_date = models.DateField(blank=True, null=True)
+    end_date = models.DateField()
     status = models.CharField(max_length=50, choices=[
         ('Started','Started'),
         ('In process','In process'),

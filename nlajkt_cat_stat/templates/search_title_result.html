@@ -10,12 +10,14 @@ Total of <b> {{ page_obj.paginator.count }} </b> titles found with keywords:
         <td>No</td>
         <td align="center">Title</td>
 		<td align="center">Entry date</td>
+		<td align="center">Record ID</td>
     </tr>
     {% for x in object_list %}
     <tr>
        <td> {{ forloop.counter0|add:page_obj.start_index }} </td>
        <td>{{ x.title }}</td>
 	   <td>{{ x.entry_date }}</td>
+	   <td>{{ x.id }}</td>
     </tr>
     {% endfor %}
 </table>
