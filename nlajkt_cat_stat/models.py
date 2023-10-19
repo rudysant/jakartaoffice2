@@ -1,11 +1,9 @@
-from email.policy import default
-from random import choices
 
 from django.db import models
 
 class Catalogues(models.Model):
     entry_date = models.DateField()
-    consignment_no = models.IntegerField(default=464)
+    consignment_no = models.IntegerField(default=465)
     title = models.TextField()
 
     work_type = models.CharField(max_length=20, choices=[
@@ -168,7 +166,7 @@ class Book_source(models.Model):
 class Consignment(models.Model):
     consign_no = models.IntegerField()
     start_date = models.DateField()
-    end_date = models.DateField()
+    end_date = models.DateField(blank=True, null=True)
     status = models.CharField(max_length=50, choices=[
         ('Started','Started'),
         ('In process','In process'),
@@ -213,3 +211,13 @@ class Field_trip(models.Model):
         ('Postponed','Postponed'),
         ('Canceled','Canceled')
     ], default='Scheduled')
+
+class BookRev(models.Model):
+    entrydate = models.DateField()
+    title = models.CharField(max_length = 200)
+    author = models.CharField(max_length = 100)
+    isbn = models.CharField(max_length = 20)
+    publication = models.CharField(max_length = 200)
+    paging = models.CharField(max_length = 100)
+    summary = models.TextField()
+    cover = models.ImageField(upload_to = 'media')

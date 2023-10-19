@@ -1,70 +1,242 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jakarta Office Statistics Project</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jakarta Office Cataloguing Statistics</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  </head>
+  <body>
     <div class="container-fluid bg-dark text-white sticky-top">
-        <b><h3>Jakarta Office Real-time Statistics</h3></b>
-        <nav class="navbar navbar-expand-sm bg-light navbar-dark">
-            <div class="container-fluid">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="btn btn-outline-dark" href="{% url 'home' %}">Home</a></li>
-                    <li class="nav-item"><a class="btn btn-outline-dark" href="{% url 'cat_stat' %}">Cataloguing Statistics</a></li>
-                    <li class="nav-item"><a class="btn btn-outline-primary disabled" href="{% url 'acq_stat' %}">Acquisition Statistics</a></li>
-                </ul>
-                 <span class="nav-item"><a class="btn btn-outline-dark" href="{% url 'admin:index' %}">Login</a></span>
-            </div>
-        </nav>
-    </div>
+      <center><b><h3>JO Monograph Cataloguing Statistics</h3></b>
+      <nav class="navbar navbar-expand-sm bg-light navbar-dark">
+          <div class="container-fluid justify-content-center">
+              <ul class="navbar-nav">
+                  <li class="nav-item"><a class="btn btn-outline-dark" href="{% url 'home' %}">Home</a></li>
 
-{% block block1 %}
-<br><br><br><br>
-{% load static %}
-<div class="container mt-3">
-  <h1>Statistic snapshots</h1>
-  <p>Interesting facts:</p>
-  <blockquote class="blockquote">
-    <p><i>"45% of acquired titles, published in 2022 compared to 19% published in 2021 ...</p>
-    <p>while commercial publications dominate by 73% off all monthly purchase."</i></p><br>
-    <footer class="blockquote-footer"><a href="{% url 'cat_stat' %}">Click for more facts!</a></footer>
-  </blockquote>
-  <blockquote class="blockquote">
-    <p>Or use mobile phone to scan these QR codes below:</p>
-  <p><img src = "{% static 'img/jakartaoffice_cat.png' %}"> or <img src = "{% static 'img/jakartaoffice_acq.png' %}"> </p>
-  </blockquote>
-</div>
-<br><br><center>
-<h1>Books of the month</h1>
-  <p></p>
-  <blockquote class="blockquote">
-    <p><img src = "{% static 'img/Capture20230223_1.JPG' %}" class="rounded-circle" alt="Cinque Terre" width="304" height="236">
-       <img src = "{% static 'img/Capture20230223_2.JPG' %}" class="rounded-circle" alt="Cinque Terre" width="304" height="236">
-       <img src = "{% static 'img/Capture20230223_3.JPG' %}" class="rounded-circle" alt="Cinque Terre" width="304" height="236"></p>
-
-  </blockquote>
-</div> </center>
+                  <li class="nav-item"><a class="btn btn-outline-dark" href="{% url 'admin:index' %}">Login</a>
+          </div>
+      </nav>
+  </div>
+  {% block block1 %}
 <br><br>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Real-time Monograph Statistics</h4> <br>
+        <table style="width: auto;" class="table table-striped">
+          <tr><td>Total of cataloguing (<b>since 2 September 2022</b>)</td><td> : </td><td><b> {{ bookcount }} </b></td></tr>
+          <tr><td>Titles catalogued today<td>:</td></td><td><b>{{ catt }}</b></td></tr>
+          <tr><td>Titles catalogued this week <td>:</td></td><td><b>{{ catweek }}</b></td></tr>
 
-<br><br><center>
+          <tr><td>Titles catalogued this year ( {% now "Y" %} )</td><td> : </td><td><b> {{ catyear }} </b></td></tr>
+          <tr><td>Titles catalogued on current consignment number ({{ curcons }})</td><td> : </td><td><b> {{ catcons }} </b></td></tr>
+          <tr><td>Titles catalogued by date range (<b>not before 2 September 2022</b>)</td><td> : </td></tr>
 
+<tr><td>
+
+<form action="{% url 'search_results' %}" method="get">
+  <b>From : </b><input name="q1" type="date" placeholder="Date from...">
+   <b>to : </b><input name="q2" type="date" placeholder="Date to...">
+  <input type="submit" value="Search">
+</form></td></tr>
+
+<tr><td>Titles catalogued by keywords</td><td> : </td></tr>
+
+<tr><td>
+<form action="{% url 'search_title_results' %}" method="get">
+  <input name="q1" type="text" placeholder="keyword 1"> <b>and</b>
+  <input name="q2" type="text" placeholder="keyword 2">
+  <input type="submit" value="Search">
+</form></td></tr>
+</table>
+<br>
+<h4>Cataloguing by consignments</h4>
+<table style="width: auto;" class="table table-striped">
+    <tr bgcolor='lightgrey'>
+        <td align="center"><b>Consignment no</b></td>
+        <td align="center"><b>Start</b></td>
+        <td align="center"><b>Finish</b></td>
+        <td align="center"><b>New titles</b></td>
+        <td align="center"><b>Added volumes</b></td>
+
+    </tr>
+    {% for x in cat_cons %}
+    <tr>
+        <td align="center">{{ x.consign_no }}</td>
+        <td align="center">{{ x.start_date }}</td>
+        <td align="center">{{ x.end_date }}</td>
+        <td align="center">{{ x.new_title }}</td>
+        <td align="center">{{ x.add_vol }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+         <br><br>
+        <h4>Latest highlighted titles</h4>
+        <table  border='3' style="width: auto;" class="table table-striped">
+
+
+    {% for x in bookrev|slice:"3" %}
+    <tr><td align="center"><img src='{{ x.cover.url }}'></td>
+        <td align="left"><b>{{ x.title }} </b> / {{ x.author }}
+            <br><br> ISBN {{ x.isbn }}
+            <br> {{ x.publication }}
+            <br> {{ x.paging }}
+            <br><br><i> {{ x.summary }} </i>
+            </td>
+
+
+    </tr>
+    {% endfor %}
+
+
+        </table>
+
+
+        </table>
+
+
+
+      </div>
+
+
+      <div class="col-md-6">
+<center>
+          <h4>Detailed Monograph Statistics</h4>
+          {% load percent_aut %}
+
+Year of publishing || <a href="/cat_stat/yearpublish-chart/">Chart</a>
+
+<table style="width: auto;" class="table table-striped">
+    <tr bgcolor='lightgrey'>
+        <td><b>Year</b></td>
+        <td align="center"><b>Count</b></td>
+        <td align="center"><b>Percentage</b></td>
+    </tr>
+    {% for x in pubyear|slice:"10" %}
+    <tr>
+        <td><a href="detail_pubyear/{{ x.publish_year }}">{{ x.publish_year }}</a></td>
+        <td align="center">{{ x.pubyearcount }}</td>
+        <td align="center">{{ x.pubyearcount|as_percentage_of:bookcount }}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td align="center"> Older than 10 years</td>
+        <td align="center">{{ oldpub }}</td>
+        <td align="center">{{ oldpub|as_percentage_of:bookcount }}</td>
+    </tr>
+    </table>
+
+<br>
+Type of publisher || <a href="/cat_stat/publisher-chart/">Chart</a>
+<table style="width: auto;" class="table table-striped">
+    <tr bgcolor='lightgrey'>
+        <td><b>Type of publisher</b></td>
+        <td align="center"><b>Count</b></td>
+        <td align="center"><b>Percentage</b></td>
+    </tr>
+    {% for x in typepub|dictsortreversed:"typepubcount" %}
+    <tr>
+        <td><a href="detail_publisher/{{ x.publisher_type }}">{{ x.publisher_type }}</a></td>
+        <td align="center">{{ x.typepubcount }}</td>
+        <td align="center">{{ x.typepubcount|as_percentage_of:bookcount }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+
+<br>
+Genre || <a href="/cat_stat/genre-chart/">Chart</a>
+<table style="width: auto;" class="table table-striped">
+    <tr bgcolor='lightgrey'>
+        <td><b>Genre</b></td>
+        <td align="center"><b>Count</b></td>
+        <td align="center"><b>Percentage</b></td>
+    </tr>
+    {% for x in typegenre|dictsortreversed:"typegenrecount" %}
+    <tr>
+        <td><a href="detail_genre/{{ x.genre }}">{{ x.genre }}</a></td>
+        <td align="center">{{ x.typegenrecount }}</td>
+        <td align="center">{{ x.typegenrecount|as_percentage_of:bookcount }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+
+<br>
+Language || <a href="/cat_stat/language-chart/">Chart</a>
+<table style="width: auto;" class="table table-striped">
+    <tr bgcolor='lightgrey'>
+        <td><b>Language</b></td>
+        <td align="center"><b>Count</b></td>
+        <td align="center"><b>Percentage</b></td>
+    </tr>
+    {% for x in lang|dictsortreversed:"langcount" %}
+    <tr>
+        <td><a href="detail_language/{{ x.language }}">{{ x.language }}</a></td>
+        <td align="center">{{ x.langcount }}</td>
+        <td align="center">{{ x.langcount|as_percentage_of:bookcount }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+
+<br>
+Authorship || <a href="/cat_stat/authorship-chart/">Chart</a>
+<table style="width: auto;" class="table table-striped">
+    <tr bgcolor='lightgrey'>
+        <td><b>Authorship</b></td>
+        <td align="center"><b>Count</b></td>
+        <td align="center"><b>Percentage</b></td>
+    </tr>
+    {% for x in typeaut|dictsortreversed:"typeautcount" %}
+    <tr>
+        <td><a href="detail_authorship/{{ x.authorship_type }}">{{ x.authorship_type }}</a></td>
+        <td align="center">{{ x.typeautcount }}</td>
+        <td align="center">{{ x.typeautcount|as_percentage_of:bookcount }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+
+<br>
+Copycat status || <a href="/cat_stat/copycat-chart/">Chart</a>
+<table style="width: auto;" class="table table-striped">
+        <tr bgcolor='lightgrey'>
+            <td><b>Copycat status</b></td>
+            <td align="center"><b>Count</b></td>
+            <td align="center"><b>Percentage</b></td>
+        </tr>
+        {% for x in copycat|dictsortreversed:"copycatcount" %}
+        <tr>
+            <td><a href="detail_copycat/{{ x.copycat }}">{{ x.copycat }}</a></td>
+            <td align="center">{{ x.copycatcount }}</td>
+            <td align="center">{{ x.copycatcount|as_percentage_of:bookcount }}</td>
+        </tr>
+        {% endfor %}
+        </table>
+
+<br>
+Subject || <a href="/cat_stat/subject-chart/">Chart</a>
+<table style="width: auto;" class="table table-striped">
+        <tr bgcolor='lightgrey'>
+            <td><b>Subject</b></td>
+            <td align="center"><b>Count</b></td>
+            <td align="center"><b>Percentage</b></td>
+            </tr>
+            {% for x in subj|dictsortreversed:"subjcount" %}
+        <tr>
+            <td><a href="detail_subject/{{ x.subject }}">{{ x.subject }}</a></td>
+            <td align="center">{{ x.subjcount }}</td>
+                    <td align="center">{{ x.subjcount|as_percentage_of:bookcount }}</td>
+        </tr>
+        {% endfor %}
+        </table>
+<br><br>
+</div>
 </center>
-{% endblock %}
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <div class="container-fluid">
-        <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
 
-            <li class="nav-item"><a class="nav-link" href="{% url 'cat_stat' %}">Cataloguing Statistics</a></li>
-            <li class="nav-item"><a class="nav-link disabled" href="{% url 'acq_stat' %}">Acquisition Statistics</a></li>
-        </ul>
-        <span class="navbar-text">jo-rs2022</span>
+      </div>
     </div>
-</nav>
-</body>
+  </div>
+  {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  </body>
 </html>

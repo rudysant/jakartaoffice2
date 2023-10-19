@@ -1,29 +1,27 @@
-from cProfile import label
-from mimetypes import suffix_map
-from django.http import HttpResponse
-from django.db.models import Count, Q, Max, Sum
-from django.template import loader
-from .models import Catalogues, Acquisition, Book_source, Consignment, Field_trip, Trip_place, Cat_cons
-import datetime
 from django.shortcuts import render
+from .models import Catalogues, Consignment, Cat_cons, BookRev
 from django.views.generic import ListView
 from django.core.paginator import Paginator
+from django.db.models import Count, Q
+from django.template import loader
+from django.http import HttpResponse
+import datetime
 
 today = datetime.date.today()
 thisyear = datetime.date.today().year
 thismonth = datetime.date.today().month
+
+one_week_ago = datetime.date.today() - datetime.timedelta(days=7)
 oldyear = thisyear-10
 
 def home(request):
-    return render(request, 'base.html')
-
-def cat_stat(request):
-    curcons = Consignment.objects.filter(status = 'In process').only('consign_no')[0].consign_no
-#    Catalogues.objects.aggregate(Max('consignment_no')).get('consignment_no__max')
     bookcount = Catalogues.objects.all().count()
-    catyear = Catalogues.objects.filter(entry_date__year=thisyear).count()
-    catmonth = Catalogues.objects.filter(entry_date__month=thismonth).count()
     catt = Catalogues.objects.filter(entry_date=today).count()
+    catweek = Catalogues.objects.filter(entry_date__gte=one_week_ago).count()
+#    catmonth = Catalogues.objects.filter(entry_date__month = thismonth).count()
+    catmonth = Catalogues.objects.filter(entry_date__month=thismonth).count()
+    catyear = Catalogues.objects.filter(entry_date__year=thisyear).count()
+    curcons = Consignment.objects.filter(status = 'In process').only('consign_no')[0].consign_no
     catcons = Catalogues.objects.filter(consignment_no = curcons).count()
     cat_cons = Cat_cons.objects.all().order_by('-consign_no')
     pubyear = Catalogues.objects.values('publish_year').order_by('-publish_year').annotate(pubyearcount=Count('publish_year'))
@@ -34,10 +32,12 @@ def cat_stat(request):
     copycat = Catalogues.objects.values('copycat').annotate(copycatcount=Count('copycat'))
     subj =Catalogues.objects.values('subject').annotate(subjcount=Count('subject'))
     oldpub = Catalogues.objects.filter(publish_year__lt = oldyear).count()
+    bookrev = BookRev.objects.all().order_by('-id')
 
     context = {
         'catyear' : catyear,
         'catt' : catt,
+        'catweek' : catweek,
         'bookcount' : bookcount,
         'catmonth' : catmonth,
         'curcons' : curcons,
@@ -51,10 +51,11 @@ def cat_stat(request):
         'typeaut' : typeaut,
         'copycat' : copycat,
         'subj' : subj,
-      }
+        'bookrev' : bookrev,
 
-    template = loader.get_template('cat_stat.html')
-    return HttpResponse(template.render(context, request))
+    }
+
+    return render(request, 'base.html', context)
 
 class SearchResultsView(ListView):
     model = Catalogues
@@ -243,31 +244,7 @@ def subject_chart(request):
       data.append(xlang['langcount'])
     return render(request, 'chart_subject.html',{'labels' : labels,'data' : data,})
 
-def acq_stat(request):
-    acq = Acquisition.objects.all()
-    cons = Consignment.objects.all().order_by('-consign_no')
-    ftrip = Field_trip.objects.all()
-#    curcons = Consignment.objects.filter(status = 'In process').only('consign_no')[0].consign_no
-    curcons = Consignment.objects.aggregate(Max('consign_no')).get('consign_no__max')
-    catcons = Catalogues.objects.filter(consignment_no = curcons).count()
-    total_proc = Acquisition.objects.aggregate(Sum('titles_proc')).get('titles_proc__sum')
-    total_expense = Acquisition.objects.aggregate(Sum('value')).get('value__sum')
-    bookcount = Catalogues.objects.all().count()
-    uncat = total_proc - catcons
-    vendor_count = Acquisition.objects.values('vendor__name').annotate(vendorcount=Sum('titles_proc'))
-    vendor_cat = Acquisition.objects.values('vendor__category').annotate(vendorcount=Sum('titles_proc'))
 
-    context = {
-        'acq' : acq,
-        'curcons' : curcons,
-        'total_proc' : total_proc,
-        'bookcount' : bookcount,
-        'vendor_count' : vendor_count,
-        'vendor_cat' : vendor_cat,
-        'total_expense' : total_expense,
-        'cons' : cons,
-        'uncat' : uncat,
-        'ftrip' : ftrip
-    }
-    template = loader.get_template('acq_stat.html')
-    return HttpResponse(template.render(context, request))
+
+
+

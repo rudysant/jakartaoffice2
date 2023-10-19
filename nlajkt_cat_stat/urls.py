@@ -4,18 +4,18 @@ from .views import SearchResultsView, SearchResultsView2
 
 urlpatterns = [
     path('', views.home, name = 'home'),
-    path('cat_stat/', views.cat_stat, name='cat_stat'),
-    path('acq_stat/', views.acq_stat, name='acq_stat'),
+ #   path('cat_stat/', views.cat_stat, name='cat_stat'),
+ #   path('acq_stat/', views.acq_stat, name='acq_stat'),
     path('search/', SearchResultsView.as_view(), name='search_results'),
     path('search_/', SearchResultsView2.as_view(), name='search_title_results'),
 
-    path('cat_stat/detail_pubyear/<int:publish_year>/', views.detail_pubyear, name='detail_pubyear'),
-    path('cat_stat/detail_publisher/<str:publisher_type>/', views.detail_publisher, name='detail_publisher'),
-    path('cat_stat/detail_genre/<str:genre>/', views.detail_genre, name='detail_genre'),
-    path('cat_stat/detail_language/<str:language>/', views.detail_language, name='detail_language'),
-    path('cat_stat/detail_authorship/<str:authorship_type>/', views.detail_authorship, name='detail_authorship'),
-    path('cat_stat/detail_copycat/<str:copycat>/', views.detail_copycat, name='detail_copycat'),
-    path('cat_stat/detail_subject/<str:subject>/', views.detail_subject, name='detail_subject'),
+    path('detail_pubyear/<int:publish_year>/', views.detail_pubyear, name='detail_pubyear'),
+    path('detail_publisher/<str:publisher_type>/', views.detail_publisher, name='detail_publisher'),
+    path('detail_genre/<str:genre>/', views.detail_genre, name='detail_genre'),
+    path('detail_language/<str:language>/', views.detail_language, name='detail_language'),
+    path('detail_authorship/<str:authorship_type>/', views.detail_authorship, name='detail_authorship'),
+    path('detail_copycat/<str:copycat>/', views.detail_copycat, name='detail_copycat'),
+    path('detail_subject/<str:subject>/', views.detail_subject, name='detail_subject'),
 
     path('cat_stat/yearpublish-chart/', views.yearpublish_chart, name='yearpublish-chart'),
     path('cat_stat/publisher-chart/', views.publisher_chart, name='publisher-chart'),

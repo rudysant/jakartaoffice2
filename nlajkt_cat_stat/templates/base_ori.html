@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jakarta Office Statistics Project</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container-fluid bg-dark text-white sticky-top">
+        <b><h3>Jakarta Office Real-time Statistics</h3></b>
+        <nav class="navbar navbar-expand-sm bg-light navbar-dark">
+            <div class="container-fluid">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="btn btn-outline-dark" href="{% url 'home' %}">Home</a></li>
+                    <li class="nav-item"><a class="btn btn-outline-dark" href="{% url 'cat_stat' %}">Cataloguing Statistics</a></li>
+                    <li class="nav-item"><a class="btn btn-outline-primary disabled" href="{% url 'acq_stat' %}">Acquisition Statistics</a></li>
+                </ul>
+                 <span class="nav-item"><a class="btn btn-outline-dark" href="{% url 'admin:index' %}">Login</a></span>
+            </div>
+        </nav>
+    </div>
+
+{% block block1 %}
+<br><br><br><br>
+{% load static %}
+<div class="container mt-3">
+  <h1>Statistic snapshots</h1>
+  <p>Interesting facts:</p>
+  <blockquote class="blockquote">
+    <p><i>"45% of acquired titles, published in 2022 compared to 19% published in 2021 ...</p>
+    <p>while commercial publications dominate by 73% off all monthly purchase."</i></p><br>
+    <footer class="blockquote-footer"><a href="{% url 'cat_stat' %}">Click for more facts!</a></footer>
+  </blockquote>
+  <blockquote class="blockquote">
+    <p>Or use mobile phone to scan these QR codes below:</p>
+  <p><img src = "{% static 'img/jakartaoffice_cat.png' %}"> or <img src = "{% static 'img/jakartaoffice_acq.png' %}"> </p>
+  </blockquote>
+</div>
+<br><br><center>
+<h1>Books of the month</h1>
+  <p></p>
+  <blockquote class="blockquote">
+    <p><img src = "{% static 'img/Capture20230223_1.JPG' %}" class="rounded-circle" alt="Cinque Terre" width="304" height="236">
+       <img src = "{% static 'img/Capture20230223_2.JPG' %}" class="rounded-circle" alt="Cinque Terre" width="304" height="236">
+       <img src = "{% static 'img/Capture20230223_3.JPG' %}" class="rounded-circle" alt="Cinque Terre" width="304" height="236"></p>
+
+  </blockquote>
+</div> </center>
+<br><br>
+
+<br><br><center>
+
+</center>
+{% endblock %}
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+
+            <li class="nav-item"><a class="nav-link" href="{% url 'cat_stat' %}">Cataloguing Statistics</a></li>
+            <li class="nav-item"><a class="nav-link disabled" href="{% url 'acq_stat' %}">Acquisition Statistics</a></li>
+        </ul>
+        <span class="navbar-text">jo-rs2022</span>
+    </div>
+</nav>
+</body>
+</html>
