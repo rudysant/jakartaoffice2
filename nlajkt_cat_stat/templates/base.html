@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="container-fluid bg-dark text-white sticky-top">
-      <center><b><h3>JO Monograph Cataloguing Statistics</h3></b>
+      <center><b><h3>JO Monograph Cataloguing Dashboard</h3></b>
       <nav class="navbar navbar-expand-sm bg-light navbar-dark">
           <div class="container-fluid justify-content-center">
               <ul class="navbar-nav">
@@ -28,7 +28,7 @@
           <tr><td>Total of cataloguing (<b>since 2 September 2022</b>)</td><td> : </td><td><b> {{ bookcount }} </b></td></tr>
           <tr><td>Titles catalogued today<td>:</td></td><td><b>{{ catt }}</b></td></tr>
           <tr><td>Titles catalogued this week <td>:</td></td><td><b>{{ catweek }}</b></td></tr>
-
+          <tr><td>Titles catalogued this month ( {% now "F" %} )</td><td>:</td></td><td><b>{{ catmonth }}</b></td></tr>
           <tr><td>Titles catalogued this year ( {% now "Y" %} )</td><td> : </td><td><b> {{ catyear }} </b></td></tr>
           <tr><td>Titles catalogued on current consignment number ({{ curcons }})</td><td> : </td><td><b> {{ catcons }} </b></td></tr>
           <tr><td>Titles catalogued by date range (<b>not before 2 September 2022</b>)</td><td> : </td></tr>
@@ -51,7 +51,7 @@
 </form></td></tr>
 </table>
 <br>
-<h4>Cataloguing by consignments</h4>
+<h4>Cataloguing by 3 latest consignments</h4>
 <table style="width: auto;" class="table table-striped">
     <tr bgcolor='lightgrey'>
         <td align="center"><b>Consignment no</b></td>
@@ -61,7 +61,7 @@
         <td align="center"><b>Added volumes</b></td>
 
     </tr>
-    {% for x in cat_cons %}
+    {% for x in cat_cons|slice:"4" %}
     <tr>
         <td align="center">{{ x.consign_no }}</td>
         <td align="center">{{ x.start_date }}</td>

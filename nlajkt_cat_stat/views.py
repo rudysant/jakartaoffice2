@@ -6,11 +6,11 @@ from django.db.models import Count, Q
 from django.template import loader
 from django.http import HttpResponse
 import datetime
+#from datetime import datetime
 
 today = datetime.date.today()
 thisyear = datetime.date.today().year
 thismonth = datetime.date.today().month
-
 one_week_ago = datetime.date.today() - datetime.timedelta(days=7)
 oldyear = thisyear-10
 
@@ -18,8 +18,7 @@ def home(request):
     bookcount = Catalogues.objects.all().count()
     catt = Catalogues.objects.filter(entry_date=today).count()
     catweek = Catalogues.objects.filter(entry_date__gte=one_week_ago).count()
-#    catmonth = Catalogues.objects.filter(entry_date__month = thismonth).count()
-    catmonth = Catalogues.objects.filter(entry_date__month=thismonth).count()
+    catmonth = Catalogues.objects.filter(entry_date__month=thismonth, entry_date__year=thisyear).count()
     catyear = Catalogues.objects.filter(entry_date__year=thisyear).count()
     curcons = Consignment.objects.filter(status = 'In process').only('consign_no')[0].consign_no
     catcons = Catalogues.objects.filter(consignment_no = curcons).count()
@@ -52,7 +51,7 @@ def home(request):
         'copycat' : copycat,
         'subj' : subj,
         'bookrev' : bookrev,
-
+        'thismonth' : thismonth,
     }
 
     return render(request, 'base.html', context)
