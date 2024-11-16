@@ -24,4 +24,5 @@ urlpatterns = [
     path('cat_stat/authorship-chart/', views.authorship_chart, name='authorship-chart'),
     path('cat_stat/copycat-chart/', views.copycat_chart, name='copycat-chart'),
     path('cat_stat/subject-chart/', views.subject_chart, name='subject-chart'),
+ #   path('books/', views.book_list, name='book_list'),
 ]

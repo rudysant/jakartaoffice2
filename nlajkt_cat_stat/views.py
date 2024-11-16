@@ -6,6 +6,7 @@ from django.db.models import Count, Q
 from django.template import loader
 from django.http import HttpResponse
 import datetime
+#import requests
 #from datetime import datetime
 
 today = datetime.date.today()
@@ -242,6 +243,12 @@ def subject_chart(request):
       labels.append(xlang['subject'])
       data.append(xlang['langcount'])
     return render(request, 'chart_subject.html',{'labels' : labels,'data' : data,})
+'''
+def book_list(request):
+    response = requests.get('https://unioncat.pythonanywhere.com/api/books')
+    books = response.json()if response.status_code == 200  else []
+    return render(request, 'nlajkt_cat_stat/book_list.html', {'books': books})
+'''
 
 
 

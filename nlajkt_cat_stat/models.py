@@ -3,7 +3,7 @@ from django.db import models
 
 class Catalogues(models.Model):
     entry_date = models.DateField()
-    consignment_no = models.IntegerField(default=465)
+    consignment_no = models.IntegerField(default=469)
     title = models.TextField()
 
     work_type = models.CharField(max_length=20, choices=[
@@ -59,9 +59,7 @@ class Catalogues(models.Model):
 
     publisher_type = models.CharField(max_length=100, choices=[
         ('Commercial','Commercial'),
-        ('Government-department','Government-department'),
-        ('Government-nondepartment','Government-nondepartment'),
-        ('Government-local','Government-local'),
+        ('Government','Government'),
         ('Universities','Universities'),
         ('NGO','NGO'),
         ('Others','Others')
@@ -96,7 +94,9 @@ class Catalogues(models.Model):
     size = models.CharField(max_length=10, choices=[
         ('YY','YY'),
         ('YYq', 'YYq'),
-        ('YYp','YYp')
+        ('YYf','YYf'),
+        ('YYp','YYp'),
+        ('YYpf','YYpf')
         ],default='YY')
 
     subject = models.CharField(max_length=50, choices=[
