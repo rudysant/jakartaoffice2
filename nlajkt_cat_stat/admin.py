@@ -31,7 +31,7 @@ class Field_tripA(admin.ModelAdmin):
     list_per_page = 10
 
 class BookRevA(admin.ModelAdmin):
-    list_display = ('id', 'title')
+    list_display = ('id', 'title', 'cover')
     list_per_page = 10
 
 

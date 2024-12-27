@@ -44,7 +44,7 @@ class Catalogues(models.Model):
         ('English','English'),
         ('Indonesian local','Indonesian local'),
         ('Multi language','Multi language'),
-        ('Unknown','Unknown')
+        ('Others','Others')
         ], default='Indonesian')
 
     bibliography = models.CharField(max_length=20, choices=[
@@ -62,6 +62,7 @@ class Catalogues(models.Model):
         ('Government','Government'),
         ('Universities','Universities'),
         ('NGO','NGO'),
+        ('International','International'),
         ('Others','Others')
         ], default='Commercial')
 
